@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, Date, Boolean, DateTime, UniqueConstraint
+from sqlalchemy import Column, Integer, String, Date, Boolean, DateTime, UniqueConstraint, ForeignKey
+from sqlalchemy.orm import relationship
 
 from app.database import Base
 
@@ -21,4 +22,20 @@ class ShiftTask(Base):
     begin_shift_time = Column(DateTime, nullable=False)
     end_shift_time = Column(DateTime, nullable=False)
 
-    UniqueConstraint("batch_number", "batch_date", name="batch")
+    unique_codes = relationship("ProductUniqueCode")
+
+    __table_args__ = (
+        UniqueConstraint("batch_number", "batch_date", name="batch")
+    )
+
+
+class ProductUniqueCode(Base):
+    __tablename__ = "unique_codes"
+
+    id = Column(Integer, primary_key=True, index=True)
+    unique_code = Column(String(30), nullable=False)
+    shift_task = Column(Integer, ForeignKey('shift_tasks.id', ondelete='CASCADE'), index=True)
+
+    __table_args__ = (
+        UniqueConstraint("unique_code", name="code")
+    )
