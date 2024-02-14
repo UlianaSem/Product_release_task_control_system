@@ -25,7 +25,7 @@ class ShiftTask(Base):
     unique_codes = relationship("ProductUniqueCode")
 
     __table_args__ = (
-        UniqueConstraint("batch_number", "batch_date", name="batch")
+        UniqueConstraint("batch_number", "batch_date", name="batch"),
     )
 
 
@@ -35,7 +35,9 @@ class ProductUniqueCode(Base):
     id = Column(Integer, primary_key=True, index=True)
     unique_code = Column(String(30), nullable=False)
     shift_task = Column(Integer, ForeignKey('shift_tasks.id', ondelete='CASCADE'), index=True)
+    is_aggregated = Column(Boolean, default=False)
+    aggregated_at = Column(DateTime, nullable=True)
 
     __table_args__ = (
-        UniqueConstraint("unique_code", name="code")
+        UniqueConstraint("unique_code", name="code"),
     )
