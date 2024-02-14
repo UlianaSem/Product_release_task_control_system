@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "product-release-task-control-system"
+version = "0.1.0"
+description = ""
+authors = ["Uliana Semyonova <i@ulianasemyonova.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = {extras = ["all"], version = "^0.109.2"}
+sqlalchemy = "^2.0.26"
+alembic = "^1.13.1"
+psycopg2 = "^2.9.9"
+fastapi-filter = "^1.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
