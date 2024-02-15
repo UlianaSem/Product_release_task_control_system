@@ -45,7 +45,7 @@ def upgrade() -> None:
     sa.Column('shift_task', sa.Integer(), nullable=True),
     sa.Column('is_aggregated', sa.Boolean(), nullable=True),
     sa.Column('aggregated_at', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['shift_task'], ['shift_tasks.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['shift_task'], ['shift_tasks.id'], ondelete='CASCADE', onupdate='CASCADE'),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('unique_code', name='code')
     )
